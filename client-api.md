@@ -1,135 +1,108 @@
 # Client API Reference
 
-## Register Event Subscription
-
 ```typescript
-function on(
-  event: string,
-  callback: (error: Error | null, payload: any | null) => void
-): void;
-```
+export interface ClientOptions {
+  name?: string;
+  controller?: boolean;
+  metadata?: AppMetadata;
+  logger?: string | Logger;
+  storage?: IKeyValueStorage;
+  relayProvider?: string | IJsonRpcProvider;
+  storageOptions?: KeyValueStorageOptions;
+}
 
-Events: `connect`, `disconnect`, `session_request`, `session_update`, `call_request`, `wc_sessionRequest`, `wc_sessionUpdate`
+export abstract class IClient extends IEvents {
+  public readonly protocol = "wc";
+  public readonly version = 2;
 
-## Create New Session \(session\_request\)
+  public abstract logger: Logger;
 
-```typescript
-async function createSession(): Promise<void>;
-```
+  public abstract relayer: IRelayer;
+  public abstract storage: IKeyValueStorage;
 
-## Approve Session Request \(connect\)
+  public abstract pairing: IPairing;
+  public abstract session: ISession;
 
-```typescript
-function approveSession({
-  chainId: number, // Required
-  accounts: string[] // Required
-}): void;
-```
+  public abstract context: string;
 
-## Reject Session Request \(disconnect\)
+  public abstract readonly controller: boolean;
+  public abstract metadata: AppMetadata | undefined;
 
-```typescript
-function rejectSession({
-  message: 'OPTIONAL_ERROR_MESSAGE'
-}): void;
-```
-
-## Update Session \(session\_update\)
-
-```typescript
-function updateSession({
-  chainId: number, // Required
-  accounts: string[] // Required
-}): void;
-```
-
-## Kill Session \(disconnect\)
-
-```typescript
-function killSession(): void;
-```
-
-## Send Transaction \(eth\_sendTransaction\)
-
-```typescript
-async function sendTransaction({
-  from: string, // Required
-  to: string, // Required
-  gas: string, // Required
-  gasPrice: string, // Required
-  value: string, // Required
-  data: string, // Required
-  nonce: string, // Required
-}): Promise<string>;
-```
-
-Returns: Transaction hash
-
-## Sign Transaction \(eth\_signTransaction\)
-
-```typescript
-async function signTransaction({
-  from: string, // Required
-  to: string, // Required
-  gas: string, // Required
-  gasPrice: string, // Required
-  value: string, // Required
-  data: string, // Required
-  nonce: string, // Required
-}): Promise<string>;
-```
-
-Returns: Signed Transaction
-
-## Sign Message \(eth\_sign\)
-
-```typescript
-async function signMessage(params: string[]): Promise<string>;
-```
-
-Returns: Signature
-
-## Sign Personal Message \(personal\_sign\)
-
-```typescript
-async function signPersonalMessage(params: string[]): Promise<string>;
-```
-
-Returns: Signature
-
-## Sign Typed Data \(eth\_signTypedData\)
-
-```typescript
-async function signTypedData(params: any[]): Promise<string>;
-```
-
-Returns: Signature
-
-## Send Custom Request
-
-```javascript
-async function sendCustomRequest(payload: IJsonRpcRequest): Promise<any>;
-```
-
-Returns: JSON-RPC Response
-
-## Approve Call Request
-
-```typescript
-function approveRequest({
-  id: number, // Required
-  result: any, // Required
-}): void;
-```
-
-## Reject Call Request
-
-```typescript
-function rejectRequest({
-  id: 1,
-  error: {
-    message: "OPTIONAL_ERROR_MESSAGE"
+  constructor(opts?: ClientOptions) {
+    super();
   }
-}): void;
+
+  // for proposer to propose a session to a responder
+  public abstract connect(
+    params: ClientTypes.ConnectParams
+  ): Promise<SessionTypes.Settled>;
+  // for responder to receive a session proposal from a proposer
+  public abstract pair(params: ClientTypes.PairParams): Promise<string>;
+
+  // for responder to approve a session proposal
+  public abstract approve(
+    params: ClientTypes.ApproveParams
+  ): Promise<SessionTypes.Settled>;
+  // for responder to reject a session proposal
+  public abstract reject(params: ClientTypes.RejectParams): Promise<void>;
+  // for responder to upgrade session permissions
+  public abstract upgrade(params: ClientTypes.UpgradeParams): Promise<void>;
+  // for responder to update session state
+  public abstract update(params: ClientTypes.UpdateParams): Promise<void>;
+
+  // for proposer to request JSON-RPC
+  public abstract request(params: ClientTypes.RequestParams): Promise<any>;
+  // for responder to respond JSON-RPC
+  public abstract respond(params: ClientTypes.RespondParams): Promise<void>;
+
+  // for either to send notifications
+  public abstract notify(params: ClientTypes.NotifyParams): Promise<void>;
+  // for either to disconnect a session
+  public abstract disconnect(
+    params: ClientTypes.DisconnectParams
+  ): Promise<void>;
+}
+
+export declare namespace ClientTypes {
+  export interface ConnectParams {
+    permissions: SessionTypes.BasePermissions;
+    metadata?: AppMetadata;
+    relay?: RelayerTypes.ProtocolOptions;
+    pairing?: SignalTypes.ParamsPairing;
+  }
+
+  export interface PairParams {
+    uri: string;
+  }
+
+  export interface Response {
+    state: SessionTypes.State;
+    metadata?: AppMetadata;
+  }
+
+  export interface ApproveParams {
+    proposal: SessionTypes.Proposal;
+    response: Response;
+  }
+  export interface RejectParams {
+    proposal: SessionTypes.Proposal;
+    reason?: string;
+  }
+
+  export type UpgradeParams = SessionTypes.UpgradeParams;
+
+  export type UpdateParams = SessionTypes.UpdateParams;
+
+  export type RequestParams = SessionTypes.RequestParams;
+
+  export interface RespondParams {
+    topic: string;
+    response: JsonRpcResponse;
+  }
+
+  export type NotifyParams = SessionTypes.NotifyParams;
+
+  export type DisconnectParams = SessionTypes.DeleteParams;
+}
 ```
 
