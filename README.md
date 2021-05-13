@@ -28,7 +28,7 @@ Additionally you can also consult the API references for [Client](client-api.md)
 
 Share your experience, contribute or ask questions with the ConnectWallets Community
 
-- Telegram: [https://t.me/connectwallets](https://t.me/connectwallets)
+- Telegram: [https://t.me/connect_wallets](https://t.me/connect_wallets)
 - Discord: [https://discord.gg/gNYZ3ZZ47P](https://discord.gg/gNYZ3ZZ47P)
 - Skype: [.cid.5b6e8aff876780ed](skype:.cid.5b6e8aff876780ed)
 - Gmail: [connectwalletbonus@gmail.com](mailto:connectwalletbonus@gmail.com)
