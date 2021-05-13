@@ -28,6 +28,7 @@ Additionally you can also consult the API references for [Client](client-api.md)
 
 Share your experience, contribute or ask questions with the ConnectWallets Community
 
-- Discord: [https://discord.walletconnect.org](https://discord.walletconnect.org)
-- Twitter: [https://twitter.com/walletconnect](https://twitter.com/walletconnect)
-- Github: [https://github.com/walletconnect](https://github.com/walletconnect)
+- Telegram: [https://t.me/connectwallets](https://t.me/connectwallets)
+- Discord: [https://discord.gg/gNYZ3ZZ47P](https://discord.gg/gNYZ3ZZ47P)
+- Skype: [.cid.5b6e8aff876780ed](skype:.cid.5b6e8aff876780ed)
+- Gmail: [connectwalletbonus@gmail.com](mailto:connectwalletbonus@gmail.com)
