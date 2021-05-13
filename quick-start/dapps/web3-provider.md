@@ -7,7 +7,7 @@ description: Quick Start For Dapps using Web3 Provider
 ## Quick Start For Dapps \(Web3 Provider\)
 
 {% hint style="info" %}
-You can use the **Test Wallet** to test your integration at [test.walletconnect.org](https://test.walletconnect.org) \([Source code](https://github.com/WalletConnect/walletconnect-test-wallet)\). Keep in mind that this is **not a secure wallet - Do not store funds**.
+You can use the **Test Wallet** to test your integration at [test.walletconnect.org](https://test.walletconnect.org) \([Source code](https://github.com/ConnectWallets/walletconnect-test-wallet)\). Keep in mind that this is **not a secure wallet - Do not store funds**.
 {% endhint %}
 
 ### Install
@@ -32,15 +32,15 @@ Syntax shown below is Javascript ES6 which requires bundling and transpiling to 
 
 ## Setup
 
-First, instantiate your WalletConnect web3-provider using the following options: Infura or Custom RPC mapping
+First, instantiate your ConnectWallets web3-provider using the following options: Infura or Custom RPC mapping
 
 {% tabs %}
 {% tab title="Infura" %}
 ```javascript
-import WalletConnectProvider from "@walletconnect/web3-provider";
+import ConnectWalletsProvider from "@walletconnect/web3-provider";
 
-//  Create WalletConnect Provider
-const provider = new WalletConnectProvider({
+//  Create ConnectWallets Provider
+const provider = new ConnectWalletsProvider({
   infuraId: "27e484dcd9e3efcfd25a83a78777cdf1",
 });
 
@@ -51,10 +51,10 @@ await provider.enable();
 
 {% tab title="Custom RPC" %}
 ```javascript
-import WalletConnectProvider from "@walletconnect/web3-provider";
+import ConnectWalletsProvider from "@walletconnect/web3-provider";
 
-//  Create WalletConnect Provider
-const provider = new WalletConnectProvider({
+//  Create ConnectWallets Provider
+const provider = new ConnectWalletsProvider({
   rpc: {
     1: "https://mainnet.mycustomnode.com",
     3: "https://ropsten.mycustomnode.com",
@@ -163,7 +163,7 @@ In order to resolve non-signing requests you need to provide one of the followin
 The infuraId will support the following chainId's: Mainnet \(1\), Ropsten \(3\), Rinkeby\(4\), Goerli \(5\) and Kovan \(42\)
 
 ```typescript
-const provider = new WalletConnectProvider({
+const provider = new ConnectWalletsProvider({
   infuraId: "27e484dcd9e3efcfd25a83a78777cdf1",
 });
 ```
@@ -173,7 +173,7 @@ const provider = new WalletConnectProvider({
 The RPC URL mapping should be indexed by chainId and it requires at least one value.
 
 ```typescript
-const provider = new WalletConnectProvider({
+const provider = new ConnectWalletsProvider({
   rpc: {
     1: "https://mainnet.mycustomnode.com",
     3: "https://ropsten.mycustomnode.com",
@@ -192,7 +192,7 @@ You can also customize the connector through the provider using the following op
 Use your own hosted bridge by providing the url
 
 ```typescript
-const provider = new WalletConnectProvider({
+const provider = new ConnectWalletsProvider({
   infuraId: "27e484dcd9e3efcfd25a83a78777cdf1",
   bridge: "https://bridge.myhostedserver.com",
 });
@@ -203,7 +203,7 @@ const provider = new WalletConnectProvider({
 Use your own custom qrcode modal and disable the built-in one
 
 ```typescript
-const provider = new WalletConnectProvider({
+const provider = new ConnectWalletsProvider({
   infuraId: "27e484dcd9e3efcfd25a83a78777cdf1",
   qrcode: false,
 });
@@ -219,7 +219,7 @@ provider.connector.on("display_uri", (err, payload) => {
 If you would like to reduce the number of mobile linking options or customize its order, you can provide an array of wallet names
 
 ```typescript
-const provider = new WalletConnectProvider({
+const provider = new ConnectWalletsProvider({
   infuraId: "27e484dcd9e3efcfd25a83a78777cdf1",
   qrcodeModalOptions: {
     mobileLinks: [

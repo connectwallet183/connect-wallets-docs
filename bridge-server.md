@@ -8,7 +8,7 @@
   Response:
   Status: 200
   Content-Type: text/plain; charset=utf-8
-  Body: Hello World, this is WalletConnect v1.0
+  Body: Hello World, this is ConnectWallets v1.0
 ```
 
 ## Get Bridge Server Info
@@ -21,7 +21,7 @@
   Content-Type: application/json; charset=utf-8
   Body:
   {
-    "name": "WalletConnect Bridge Server",
+    "name": "ConnectWallets Bridge Server",
     "repository": "walletconnect-bridge",
     "version": "1.0"
   }

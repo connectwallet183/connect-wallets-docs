@@ -7,7 +7,7 @@ description: Quick Start For Dapps using Standalone Client
 ## Quick Start For Dapps \(Standalone Client\)
 
 {% hint style="info" %}
-You can use the **Test Wallet** to test your integration at [test.walletconnect.org](https://test.walletconnect.org) \([Source code](https://github.com/WalletConnect/walletconnect-test-wallet)\). Keep in mind that this is **not a secure wallet - Do not store funds**.
+You can use the **Test Wallet** to test your integration at [test.walletconnect.org](https://test.walletconnect.org) \([Source code](https://github.com/ConnectWallets/walletconnect-test-wallet)\). Keep in mind that this is **not a secure wallet - Do not store funds**.
 {% endhint %}
 
 ### Install
@@ -33,11 +33,11 @@ Syntax shown below is Javascript ES6 which requires bundling and transpiling to 
 ### Initiate Connection
 
 ```javascript
-import WalletConnect from "@walletconnect/client";
+import ConnectWallets from "@walletconnect/client";
 import QRCodeModal from "@walletconnect/qrcode-modal";
 
 // Create a connector
-const connector = new WalletConnect({
+const connector = new ConnectWallets({
   bridge: "https://bridge.walletconnect.org", // Required
   qrcodeModal: QRCodeModal,
 });

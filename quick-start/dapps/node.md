@@ -7,7 +7,7 @@ description: Quick Start For Dapps using NodeJS Client
 ## Quick Start For Dapps \(NodeJS Client\)
 
 {% hint style="info" %}
-You can use the **Test Wallet** to test your integration at [test.walletconnect.org](https://test.walletconnect.org) \([Source code](https://github.com/WalletConnect/walletconnect-test-wallet)\). Keep in mind that this is **not a secure wallet - Do not store funds**.
+You can use the **Test Wallet** to test your integration at [test.walletconnect.org](https://test.walletconnect.org) \([Source code](https://github.com/ConnectWallets/walletconnect-test-wallet)\). Keep in mind that this is **not a secure wallet - Do not store funds**.
 {% endhint %}
 
 ### Install
@@ -37,20 +37,20 @@ Syntax shown below is Javascript ES6 which requires bundling and transpiling to 
 ### Initiate Connection
 
 ```javascript
-import NodeWalletConnect from "@walletconnect/node";
-import WalletConnectQRCodeModal from "@walletconnect/qrcode-modal";
+import NodeConnectWallets from "@walletconnect/node";
+import ConnectWalletsQRCodeModal from "@walletconnect/qrcode-modal";
 
 // Create connector
-const walletConnector = new NodeWalletConnect(
+const walletConnector = new NodeConnectWallets(
   {
     bridge: "https://bridge.walletconnect.org", // Required
   },
   {
     clientMeta: {
-      description: "WalletConnect NodeJS Client",
+      description: "ConnectWallets NodeJS Client",
       url: "https://nodejs.org/en/",
       icons: ["https://nodejs.org/static/images/logo.svg"],
-      name: "WalletConnect",
+      name: "ConnectWallets",
     },
   }
 );
@@ -62,7 +62,7 @@ if (!walletConnector.connected) {
     // get uri for QR Code modal
     const uri = walletConnector.uri;
     // display QR Code modal
-    WalletConnectQRCodeModal.open(
+    ConnectWalletsQRCodeModal.open(
       uri,
       () => {
         console.log("QR Code Modal closed");
@@ -79,7 +79,7 @@ walletConnector.on("connect", (error, payload) => {
   }
 
   // Close QR Code Modal
-  WalletConnectQRCodeModal.close(
+  ConnectWalletsQRCodeModal.close(
     true // isNode = true
   );
 

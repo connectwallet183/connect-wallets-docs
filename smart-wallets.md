@@ -1,8 +1,8 @@
 # Smart Contract Wallets
 
-Smart Contract wallets like [Argent](https://argent.gitbook.io/argent/wallet-connect-and-argent) are fully supported by WalletConnect protocol.
+Smart Contract wallets like [Argent](https://argent.gitbook.io/argent/connect-wallets-and-argent) are fully supported by ConnectWallets protocol.
 
-However there is some considerations to be taken when integration WalletConnect in your dapp regarding Smart Contract wallets about how the accounts are exposed in the session, the message signatures are returned and the transactions are broadcasted.
+However there is some considerations to be taken when integration ConnectWallets in your dapp regarding Smart Contract wallets about how the accounts are exposed in the session, the message signatures are returned and the transactions are broadcasted.
 
 ## Accounts
 
@@ -82,11 +82,11 @@ const hash = web3.eth.accounts.hashMessage(message);
 
 ## Transactions
 
-Smart Contract wallets like [Argent](https://argent.gitbook.io/argent/wallet-connect-and-argent) commonly use the concept of meta transactions. These are a particular type of transaction which are signed by one or more key pairs but are submitted to the Ethereum network by a relayer.
+Smart Contract wallets like [Argent](https://argent.gitbook.io/argent/connect-wallets-and-argent) commonly use the concept of meta transactions. These are a particular type of transaction which are signed by one or more key pairs but are submitted to the Ethereum network by a relayer.
 
 The relayer pays the gas fee \(in ETH\) and the wallet will refund the relayer \(in ETH or ERC20 tokens\) up to an amount signed by the wallet's owner.
 
-From your dapp's perspective, this is managed by the mobile wallet application. Your dapp will submit a regular `{ to, value, data }` transaction to the web3 provider. This transaction will be transmitted to the mobile wallet application through WalletConnect.
+From your dapp's perspective, this is managed by the mobile wallet application. Your dapp will submit a regular `{ to, value, data }` transaction to the web3 provider. This transaction will be transmitted to the mobile wallet application through ConnectWallets.
 
 The mobile wallet will transform the data into a meta transaction:
 

@@ -7,7 +7,7 @@ description: Quick Start For Wallets Using React-Native Client
 ## Quick Start For Wallets \(React-Native Client\)
 
 {% hint style="info" %}
-You can use the **Example Dapp** to test your integration at [example.walletconnect.org](https://example.walletconnect.org) \([Source code](https://github.com/WalletConnect/walletconnect-example-dapp)\)
+You can use the **Example Dapp** to test your integration at [example.walletconnect.org](https://example.walletconnect.org) \([Source code](https://github.com/ConnectWallets/walletconnect-example-dapp)\)
 {% endhint %}
 
 ### Install
@@ -47,19 +47,19 @@ rn-nodeify --install --hack
 ### Initiate Connection
 
 ```javascript
-import WalletConnect from "@walletconnect/client";
+import ConnectWallets from "@walletconnect/client";
 
 // Create connector
-const connector = new WalletConnect(
+const connector = new ConnectWallets(
   {
     // Required
     uri: "wc:8a5e5bdc-a0e4-47...TJRNmhWJmoxdFo6UDk2WlhaOyQ5N0U=",
     // Required
     clientMeta: {
-      description: "WalletConnect Developer App",
+      description: "ConnectWallets Developer App",
       url: "https://walletconnect.org",
       icons: ["https://walletconnect.org/walletconnect-logo.png"],
-      name: "WalletConnect",
+      name: "ConnectWallets",
     },
   },
   {
@@ -88,8 +88,8 @@ connector.on("session_request", (error, payload) => {
     params: [{
       peerId: '15d8b6a3-15bd-493e-9358-111e3a4e6ee4',
       peerMeta: {
-        name: "WalletConnect Example",
-        description: "Try out WalletConnect v1.0",
+        name: "ConnectWallets Example",
+        description: "Try out ConnectWallets v1.0",
         icons: ["https://example.walletconnect.org/favicon.ico"],
         url: "https://example.walletconnect.org"
       }
