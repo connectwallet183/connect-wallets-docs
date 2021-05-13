@@ -1,6 +1,6 @@
 # Legacy Clients
 
-During the beta development of the WalletConnect clients, there were NPM packages distributed for Browser, React-Native and NodeJS clients which targetted different platforms.
+During the beta development of the ConnectWallets clients, there were NPM packages distributed for Browser, React-Native and NodeJS clients which targetted different platforms.
 
 ```bash
 # For Browser apps
@@ -20,7 +20,7 @@ Now it's unnecessary to choose between the different packages and there is a sin
 > @walletconnect/client
 ```
 
-If you used to integrate any of the above standalone clients for WalletConnect, we describe below how you should migrate to the isomorphic client now distributed
+If you used to integrate any of the above standalone clients for ConnectWallets, we describe below how you should migrate to the isomorphic client now distributed
 
 ## Migrating from Browser Client
 
@@ -47,11 +47,11 @@ Another thing to note about Browser client specifically is that now the QRCode M
 **Before**
 
 ```javascript
-import WalletConnect from "@walletconnect/browser";
+import ConnectWallets from "@walletconnect/browser";
 import QRCodeModal from "@walletconnect/qrcode-modal";
 
 // Create a connector
-const connector = new WalletConnect({
+const connector = new ConnectWallets({
   bridge: "https://bridge.walletconnect.org", // Required
 });
 
@@ -85,11 +85,11 @@ connector.on("connect", (error, payload) => {
 **After**
 
 ```javascript
-import WalletConnect from "@walletconnect/client";
+import ConnectWallets from "@walletconnect/client";
 import QRCodeModal from "@walletconnect/qrcode-modal";
 
 // Create a connector
-const connector = new WalletConnect({
+const connector = new ConnectWallets({
   bridge: "https://bridge.walletconnect.org", // Required
   qrcodeModal: QRCodeModal,
 });
@@ -136,19 +136,19 @@ Previously the React-Native client required you to pass the clientMeta and push 
 **Before**
 
 ```javascript
-import RNWalletConnect from "@walletconnect/react-native";
+import RNConnectWallets from "@walletconnect/react-native";
 
-const connector = new RNWalletConnect(
+const connector = new RNConnectWallets(
   {
     uri: "wc:8a5e5bdc-a0e4-47...TJRNmhWJmoxdFo6UDk2WlhaOyQ5N0U=", // Required
   },
   {
     clientMeta: {
       // Required
-      description: "WalletConnect Developer App",
+      description: "ConnectWallets Developer App",
       url: "https://walletconnect.org",
       icons: ["https://walletconnect.org/walletconnect-logo.png"],
-      name: "WalletConnect",
+      name: "ConnectWallets",
     },
     push: {
       // Optional
@@ -165,18 +165,18 @@ const connector = new RNWalletConnect(
 **After**
 
 ```javascript
-import WalletConnect from "@walletconnect/client";
+import ConnectWallets from "@walletconnect/client";
 
-const connector = new WalletConnect(
+const connector = new ConnectWallets(
   {
     // Required
     uri: "wc:8a5e5bdc-a0e4-47...TJRNmhWJmoxdFo6UDk2WlhaOyQ5N0U=",
     // Required
     clientMeta: {
-      description: "WalletConnect Developer App",
+      description: "ConnectWallets Developer App",
       url: "https://walletconnect.org",
       icons: ["https://walletconnect.org/walletconnect-logo.png"],
-      name: "WalletConnect",
+      name: "ConnectWallets",
     },
   },
   {
@@ -215,19 +215,19 @@ Previously the NodeJS client required you to pass the clientMeta as part of the 
 **Before**
 
 ```javascript
-import NodeWalletConnect from "@walletconnect/node";
+import NodeConnectWallets from "@walletconnect/node";
 
-const connector = new NodeWalletConnect(
+const connector = new NodeConnectWallets(
   {
     uri: "wc:8a5e5bdc-a0e4-47...TJRNmhWJmoxdFo6UDk2WlhaOyQ5N0U=", // Required
   },
   {
     clientMeta: {
       // Required
-      description: "WalletConnect Developer App",
+      description: "ConnectWallets Developer App",
       url: "https://walletconnect.org",
       icons: ["https://walletconnect.org/walletconnect-logo.png"],
-      name: "WalletConnect",
+      name: "ConnectWallets",
     },
   }
 );
@@ -236,17 +236,17 @@ const connector = new NodeWalletConnect(
 **After**
 
 ```javascript
-import WalletConnect from "@walletconnect/client";
+import ConnectWallets from "@walletconnect/client";
 
-const connector = new WalletConnect({
+const connector = new ConnectWallets({
   // Required
   uri: "wc:8a5e5bdc-a0e4-47...TJRNmhWJmoxdFo6UDk2WlhaOyQ5N0U=",
   // Required
   clientMeta: {
-    description: "WalletConnect Developer App",
+    description: "ConnectWallets Developer App",
     url: "https://walletconnect.org",
     icons: ["https://walletconnect.org/walletconnect-logo.png"],
-    name: "WalletConnect",
+    name: "ConnectWallets",
   },
 });
 ```

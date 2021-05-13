@@ -103,7 +103,7 @@
   Response:
   Status: 200
   Content-Type: text/plain; charset=utf-8
-  Body: Hello World, this is WalletConnect v2.0
+  Body: Hello World, this is ConnectWallets v2.0
 ```
 
 ### Subscribe Push Notification Webhook

@@ -1,6 +1,6 @@
 ---
-title: WalletConnect 2.0 Protocol
-description: Technical Specification for WalletConnect 2.0 Protocol
+title: ConnectWallets 2.0 Protocol
+description: Technical Specification for ConnectWallets 2.0 Protocol
 author: Pedro Gomes <pedro@walletconnect.org>
 created: "2020-12-09T00:00:00.000Z"
 updated: "2021-03-24T00:00:00.000Z"
@@ -10,11 +10,11 @@ updated: "2021-03-24T00:00:00.000Z"
 
 ## Overview
 
-WalletConnect Protocol provides secure remote signing communication between a blockchain application and wallet which controls the authentication of the user's private keys.
+ConnectWallets Protocol provides secure remote signing communication between a blockchain application and wallet which controls the authentication of the user's private keys.
 
 ## Goals
 
-The goal of WalletConnect protocol is to provide an interoperable secure remote signing experience between two separate platforms where public key authentication is required to interface with a blockchain. The goals of the WalletConnect protocol include:
+The goal of ConnectWallets protocol is to provide an interoperable secure remote signing experience between two separate platforms where public key authentication is required to interface with a blockchain. The goals of the ConnectWallets protocol include:
 
 - Reducing end-user steps for connecting two platforms securely
 - Protect end-user activity across the relay infrastructure
@@ -22,7 +22,7 @@ The goal of WalletConnect protocol is to provide an interoperable secure remote 
 
 ## Architecture
 
-At a high level, WalletConnect serves a secure communication channel between two applications that run equivalent clients for WalletConnect which are connected to a relay infrastructure communicated through a publish-subscribe pattern.
+At a high level, ConnectWallets serves a secure communication channel between two applications that run equivalent clients for ConnectWallets which are connected to a relay infrastructure communicated through a publish-subscribe pattern.
 
 ![walletconnect-protocol-simplified](.gitbook/assets/walletconnect-protocol-simplified.png)
 
@@ -54,13 +54,13 @@ Finally the following standards were used to ensure protocol agnosticism to any 
 
 ## Backwards Compatibility
 
-WalletConnect 2.0 protocol introduces new concepts when compared to its predecessor which it will purposefully break compatibility in order to provide a more consistent end-user experience across different wallets interfacing with different applications requesting to access different blockchain accounts. Not only WalletConnect 2.0 protocol becomes agnostic to the chain loosing it's strong coupling with the Ethereum blockchain state but also it decouples the session from the pairing. Finally it also introduces a stronger set of rules in terms of session management in terms of lifetime cycles and duration.
+ConnectWallets 2.0 protocol introduces new concepts when compared to its predecessor which it will purposefully break compatibility in order to provide a more consistent end-user experience across different wallets interfacing with different applications requesting to access different blockchain accounts. Not only ConnectWallets 2.0 protocol becomes agnostic to the chain loosing it's strong coupling with the Ethereum blockchain state but also it decouples the session from the pairing. Finally it also introduces a stronger set of rules in terms of session management in terms of lifetime cycles and duration.
 
 In the following sections we will discuss progressively core concepts regarding relay protocols, out-of-band sequences, JSON-RPC payloads, session management, persistent storage and client synchronization.
 
 ## Relay Protocol API
 
-Contrary to its predecessor, the WalletConnect 2.0 protocol becomes agnostic to its relay infrastructure. While it's still possible to relay communication between a blockchain application and wallet using the Bridge Server, this is now defined as it's own relay protocol that follows a standard protocol.
+Contrary to its predecessor, the ConnectWallets 2.0 protocol becomes agnostic to its relay infrastructure. While it's still possible to relay communication between a blockchain application and wallet using the Bridge Server, this is now defined as it's own relay protocol that follows a standard protocol.
 
 The Relay Protocol MUST follow a publish-subscribe pattern and which MUST have a JSON-RPC API interface that includes the following methods and corresponding behaviors with the relay network infrastructure:
 
@@ -74,7 +74,7 @@ The Relay Protocol MUST follow a publish-subscribe pattern and which MUST have a
 
 Different protocols MUST have unique method prefixing to prevent conflicts when handling network interactions from the JSON-RPC API interface. For example, the Bridge server infrastructure would include methods such as `waku_info`, `waku_subscribe` and `waku_publish`.
 
-Some relay protocols may require some initialization parameters which need to be shared with another WalletConnect clients with out-of-band communication. For example, Bridge server infrastructure would include the url of the server as parameter:
+Some relay protocols may require some initialization parameters which need to be shared with another ConnectWallets clients with out-of-band communication. For example, Bridge server infrastructure would include the url of the server as parameter:
 
 ```typescript
 interface RelayProtocolOptions {
@@ -88,11 +88,11 @@ const protocolOptions: RelayProtocolOptions = {
 };
 ```
 
-This shares some similarities with the WalletConnect 1.0 protocol which this protocol options were shared through the URI used when scanning a QR Code or deep linked. With the WalletConnect 2.0 protocol, any relay protocol is available therefore these protocols options are open to other potential relay infrastructure available to both the application and the wallet to share out-of-band which leads us to the out-of-band sequences.
+This shares some similarities with the ConnectWallets 1.0 protocol which this protocol options were shared through the URI used when scanning a QR Code or deep linked. With the ConnectWallets 2.0 protocol, any relay protocol is available therefore these protocols options are open to other potential relay infrastructure available to both the application and the wallet to share out-of-band which leads us to the out-of-band sequences.
 
 ## Out-of-Band Sequences
 
-Just like its predecessor at its core there is a concept of a proposer and responder that share some out-of-band information that is not available to the relay protocol in order to relay payloads encrypted. This is now defined with WalletConnect 2.0 Protocol as an out-of-band sequence. There are two different sequences within WalletConnect 2.0 protocol: pairing and session. They both follow the same procedure to settle an out-of-band sequence. Let's first describe the "approve" flow:
+Just like its predecessor at its core there is a concept of a proposer and responder that share some out-of-band information that is not available to the relay protocol in order to relay payloads encrypted. This is now defined with ConnectWallets 2.0 Protocol as an out-of-band sequence. There are two different sequences within ConnectWallets 2.0 protocol: pairing and session. They both follow the same procedure to settle an out-of-band sequence. Let's first describe the "approve" flow:
 
 - t0 - Proposer generates a sequence proposal that includes a out-of-band data signal and shares with Responder
 - t1 - Responder constructs the proposal using the received signal and approves it which internally sends a response
@@ -243,7 +243,7 @@ interface PairingSettled {
 
 By now you should have noted that we have specified permissions but by default we only use a single method `wc_sessionPropose` allowed. This takes us to how pairing and session relate to each other.
 
-On the WalletConnect 1.0 protocol, a pairing was established per session which made bandwidth requirements for sessions unnecessarily high. Now with WalletConnect 2.0 protocol pairings are settled independently of the sessions. With a settled pairing being used as a secure channel, sessions can be initiated between two platforms.
+On the ConnectWallets 1.0 protocol, a pairing was established per session which made bandwidth requirements for sessions unnecessarily high. Now with ConnectWallets 2.0 protocol pairings are settled independently of the sessions. With a settled pairing being used as a secure channel, sessions can be initiated between two platforms.
 
 Once two participants are paired, their communications are encrypted through the pairing. The participants can use the pairing topic to derive shared key to send detailed session proposal with specified permissions through the relay network.
 
@@ -385,9 +385,9 @@ At this stage, we can consider two applications fully connected. A session has s
 
 ## JSON-RPC Payloads
 
-Now that WalletConnect 2.0 protocol is agnostic to the blockchain interface, it was important to dictate the rules upfront before session settlement to ensure a consistent end-user experience across multiple blockchain applications being interoperable with multiple blockchain wallets.
+Now that ConnectWallets 2.0 protocol is agnostic to the blockchain interface, it was important to dictate the rules upfront before session settlement to ensure a consistent end-user experience across multiple blockchain applications being interoperable with multiple blockchain wallets.
 
-Therefore we will add support for CAIP-27 provider requests which will allow JSON-RPC requests to be accompanied by chainId target, this is translated as JSON-RPC request in WalletConnect between the two clients as follows:
+Therefore we will add support for CAIP-27 provider requests which will allow JSON-RPC requests to be accompanied by chainId target, this is translated as JSON-RPC request in ConnectWallets between the two clients as follows:
 
 ```typescript
 interface CAIP27Request {
@@ -404,11 +404,11 @@ interface CAIP27Request {
 }
 ```
 
-This allows a blockchain application to be connected to a blockchain wallet on multiple chains at the same time and target requests individually. While chainId is optional, is highly recommended that is used by all providers built on top of the WalletConnect 2.0 protocol.
+This allows a blockchain application to be connected to a blockchain wallet on multiple chains at the same time and target requests individually. While chainId is optional, is highly recommended that is used by all providers built on top of the ConnectWallets 2.0 protocol.
 
 ## Session Management
 
-Contrary to its predecessor, WalletConnect 2.0 protocol is opinionated about session management on two fronts: lifecycles and duration.
+Contrary to its predecessor, ConnectWallets 2.0 protocol is opinionated about session management on two fronts: lifecycles and duration.
 
 You can read more about how to manage it in your application under [session management](session-management.md)
 
@@ -430,7 +430,7 @@ Therefore the sessions are stored controlled by the client to ensure the lifecyc
 
 ## Persistent Storage
 
-WalletConnect 2.0 clients are now also in control of persistent storage to ensure sessions are managed correctly on both sides hence the minimum requirement for a client to be compatible in all platforms by providing a basic key-value storage interface with asynchronous methods for get, set and delete
+ConnectWallets 2.0 clients are now also in control of persistent storage to ensure sessions are managed correctly on both sides hence the minimum requirement for a client to be compatible in all platforms by providing a basic key-value storage interface with asynchronous methods for get, set and delete
 
 ## Client Synchronization
 

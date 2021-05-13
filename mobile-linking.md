@@ -1,6 +1,6 @@
 # Mobile Linking
 
-For a long time WalletConnect served only as secure remote communication between a mobile wallet and a desktop application.
+For a long time ConnectWallets served only as secure remote communication between a mobile wallet and a desktop application.
 
 However connecting a mobile wallet and a mobile application was always possible by design.
 
@@ -30,7 +30,7 @@ Similar pattern happens when signing requests are required from the user:
 3. Wallet prompts user to return to Dapp manually
 4. User presses back/return button to return to Dapp
 
-In the next sections, we describe how both Wallets and Dapps can support the mobile linking pattern for their WalletConnect integrations.
+In the next sections, we describe how both Wallets and Dapps can support the mobile linking pattern for their ConnectWallets integrations.
 
 ## Wallet Support
 
@@ -38,7 +38,7 @@ In order to add support for mobile linking within your wallet, you will just nee
 
 ### For Android
 
-Android has the easiest integration as its operating system is designed to handle multiple applications subscribing to the same deep linking schema. Hence you will only need to register to the `wc:` schema that is defined per the WalletConnect URI standard.
+Android has the easiest integration as its operating system is designed to handle multiple applications subscribing to the same deep linking schema. Hence you will only need to register to the `wc:` schema that is defined per the ConnectWallets URI standard.
 
 ```bash
 # Example
@@ -54,7 +54,7 @@ wc:00e46b69-d0cc-4b3e-b6a2-cee442f97188@1
 
 ### For iOS
 
-iOS has some more caveats to the integration but we ensure to make it as straightforward as possible. Since its operating system is not designed to handle multiple applications subscribing to the same deep linking schema, we've designed the QRCode Modal to list supporting wallets on our [open-source registry](https://github.com/WalletConnect/walletconnect-registry/) and target specific deep links or universal links for each wallet.
+iOS has some more caveats to the integration but we ensure to make it as straightforward as possible. Since its operating system is not designed to handle multiple applications subscribing to the same deep linking schema, we've designed the QRCode Modal to list supporting wallets on our [open-source registry](https://github.com/ConnectWallets/walletconnect-registry/) and target specific deep links or universal links for each wallet.
 
 To add your own wallet to the registry, you must submit an Issue on our registry on [Github](https://github.com/walletconnect/walletconnect-registry).
 
@@ -96,5 +96,5 @@ npm install --save @walletconnect/qrcode-modal
 {% endtab %}
 {% endtabs %}
 
-If you would like to build your own UI for mobile linking, you can use our registry [API](https://github.com/walletconnect/walletconnect-registry) to get app entries and logos however we highly recommend that you use our provided qrcode-modal package to maintain a consistent UX across WalletConnect integrations however we modularized our packages to give the option on the ethos of decentralization.
+If you would like to build your own UI for mobile linking, you can use our registry [API](https://github.com/walletconnect/walletconnect-registry) to get app entries and logos however we highly recommend that you use our provided qrcode-modal package to maintain a consistent UX across ConnectWallets integrations however we modularized our packages to give the option on the ethos of decentralization.
 

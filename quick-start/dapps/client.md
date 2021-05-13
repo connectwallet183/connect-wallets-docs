@@ -17,12 +17,12 @@ npm install --save @walletconnect/client@experimental
 
 ## Create Session
 
-1. Initiate your WalletConnect client with the relay server
+1. Initiate your ConnectWallets client with the relay server
 
 ```javascript
-import WalletConnectClient from "@walletconnect/client";
+import ConnectWalletsClient from "@walletconnect/client";
 
-const client = await WalletConnectClient.init({
+const client = await ConnectWalletsClient.init({
   relayProvider: "wss://relay.walletconnect.org",
   metadata: {
     name: "Example Dapp",

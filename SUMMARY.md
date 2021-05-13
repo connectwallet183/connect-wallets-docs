@@ -1,6 +1,6 @@
 # Table of contents
 
-- [WalletConnect v2.0](README.md)
+- [ConnectWallets v2.0](README.md)
 - [Quick Start](quick-start/README.md)
   - [Dapps](quick-start/dapps/README.md)
     - [Standalone Client](quick-start/dapps/client.md)

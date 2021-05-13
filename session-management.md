@@ -1,8 +1,8 @@
 # Session Management
 
-Managing session with WalletConnect v2.0 protocol has improved dramatically. The client will maintain a state of the sessions up-to-date and cached in the key-value storage. Therefore you can rely on the client to track its state on your application and simply use events to update it.
+Managing session with ConnectWallets v2.0 protocol has improved dramatically. The client will maintain a state of the sessions up-to-date and cached in the key-value storage. Therefore you can rely on the client to track its state on your application and simply use events to update it.
 
-Regardless if you are integrating WalletConnect to an app or a wallet you will be able to follow the instructions below to improve your WalletConnect user experience.
+Regardless if you are integrating ConnectWallets to an app or a wallet you will be able to follow the instructions below to improve your ConnectWallets user experience.
 
 ## Initialization
 
@@ -16,7 +16,7 @@ const client = await Client.init({ ...clientOpts });
 
 ## State Queries
 
-WalletConnect tracks essentially two sequences \(pairing and session\) which you can query from your client using the following methods: values, topics and entries.
+ConnectWallets tracks essentially two sequences \(pairing and session\) which you can query from your client using the following methods: values, topics and entries.
 
 ```typescript
 /* ----------- pairing ----------- */

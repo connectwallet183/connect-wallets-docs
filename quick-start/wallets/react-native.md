@@ -17,13 +17,13 @@ npm install --save @walletconnect/client@experimental
 
 ## Create Session
 
-1. Initiate your WalletConnect client with the relay server
+1. Initiate your ConnectWallets client with the relay server
 
 ```javascript
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import WalletConnectClient from "@walletconnect/client";
+import ConnectWalletsClient from "@walletconnect/client";
 
-const client = await WalletConnectClient.init({
+const client = await ConnectWalletsClient.init({
   controller: true,
   relayProvider: "wss://relay.walletconnect.org",
   metadata: {
@@ -100,7 +100,7 @@ import { JsonRpcResponse } from "@json-rpc-tools/utils";
 client.on(
   CLIENT_EVENTS.session.request,
   async (requestEvent: SessionTypes.RequestEvent) => {
-    // WalletConnect client can track multiple sessions
+    // ConnectWallets client can track multiple sessions
     // assert the topic from which application requested
     const { topic, request } = requestEvent;
     const session = await client.session.get(requestEvent.topic);
